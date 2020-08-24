@@ -25,9 +25,15 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.less"
             ],
             "scripts": []
@@ -92,6 +98,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.less"
             ],
             "scripts": []
@@ -123,6 +130,50 @@
           }
         }
       }
-    }},
-  "defaultProject": "goku"
+    },
+    "@goku/http": {
+      "projectType": "library",
+      "root": "projects/goku/http",
+      "sourceRoot": "projects/goku/http/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/goku/http/tsconfig.lib.json",
+            "project": "projects/goku/http/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/goku/http/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/goku/http/src/test.ts",
+            "tsConfig": "projects/goku/http/tsconfig.spec.json",
+            "karmaConfig": "projects/goku/http/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/goku/http/tsconfig.lib.json",
+              "projects/goku/http/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "goku",
+  "cli": {
+    "analytics": false
+  }
 }

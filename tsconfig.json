@@ -12,6 +12,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/goku/http/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/goku/http/tsconfig.spec.json"
     }
 ]
 }

@@ -1,0 +1,21 @@
+<div class="sidebar-logo">
+  <a href="javascript:;" target="_blank">
+    <img src="../../../assets/images/logo.png" alt="logo" />
+    <h1>goku-team</h1>
+  </a>
+</div>
+<ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+  <li
+    *ngFor="let menu of menus"
+    nz-submenu
+    nzOpen
+    [nzTitle]="menu.text"
+    [nzIcon]="menu.icon"
+  >
+    <ul>
+      <li *ngFor="let menuItem of menu.childs" nz-menu-item nzMatchRouter>
+        <a [routerLink]="[menuItem.path]">{{ menuItem.text }}</a>
+      </li>
+    </ul>
+  </li>
+</ul>

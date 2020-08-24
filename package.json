@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open --proxy-config proxy.conf.json",
+    "server": "supervisor ./server/bin/www",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -19,12 +20,14 @@
     "@angular/platform-browser": "~10.0.4",
     "@angular/platform-browser-dynamic": "~10.0.4",
     "@angular/router": "~10.0.4",
+    "ng-zorro-antd": "^9.3.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.3",
+    "@angular-devkit/build-ng-packagr": "~0.1000.5",
     "@angular/cli": "~10.0.3",
     "@angular/compiler-cli": "~10.0.4",
     "@types/node": "^12.11.1",
@@ -38,6 +41,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~3.3.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "ng-packagr": "^10.0.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",

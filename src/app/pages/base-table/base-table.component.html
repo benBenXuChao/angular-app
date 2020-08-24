@@ -1,0 +1,19 @@
+<button nz-button (click)="add()" nzType="primary">添加</button>
+<br />
+<br />
+<nz-table #editRowTable nzBordered [nzData]="dataList">
+  <thead>
+    <tr>
+      <th *ngFor='let col of cols'>{{col.label}}</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of dataList" class="editable-row">
+      <td *ngFor='let col of cols'>{{data[col.prop]}}</td>
+      <td>
+        <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (click)="delete(data.id)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'goku'`, () => {
+  it(`should have as title 'goku-http'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('goku');
+    expect(app.title).toEqual('goku-http');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('goku app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('goku-http app is running!');
   });
 });
