@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { GKMenus } from './menu.model';
+import {hybridRoutes} from '../../routes/routes.conf';
 
 @Component({
   selector: 'app-menu',
@@ -9,18 +11,7 @@ export class MenuComponent implements OnInit {
   @Input()
   isCollapsed = false;
 
-  menus = [
-    {
-      icon: 'dashboard',
-      text: '代码逻辑',
-      childs: [
-        {
-          text: '基础表格',
-          path: '/base-table',
-        },
-      ],
-    },
-  ];
+  menus: GKMenus = hybridRoutes.getMenus();
   constructor() {}
 
   ngOnInit(): void {}
