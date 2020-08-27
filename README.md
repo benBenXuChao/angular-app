@@ -85,6 +85,17 @@ ng g lib @goku/http
 ng g s tool --project=@goku/tools 
 ```
 
+### 测试library
+在开发完成library后,需要编写相应模块的单元测试文件,同时,要查看单元测试结果,可通过命令`ng test <libraryName>`来进行,例如:  
+```
+ng test @goku/http
+```  
+如果同时需要查看覆盖率报告的话,可以在命令后面添加参数`--codeCoverage`即:`ng test <libraryName> --codeCoverage`.例如:
+```
+ng test @goku/http --codeCoverage
+```  
+覆盖率报告可在/coverage目录下查看,该目录下会按照library名生成对应目录,在对应的目录下打开index.html文件即可查看覆盖率详细信息
+
 ### 编译library
 如上文中所提,编译library只需要在`ng build` 后面添加上library名,同时添加上--prod即可:  
 `ng build <libraryName> --prod`
