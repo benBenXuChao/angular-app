@@ -94,7 +94,7 @@ ng test @goku/http
 ```
 ng test @goku/http --codeCoverage
 ```  
-覆盖率报告可在/coverage目录下查看,该目录下会按照library名生成对应目录,在对应的目录下打开index.html文件即可查看覆盖率详细信息
+覆盖率报告可在`/coverage`目录下查看,该目录下会按照library名生成对应目录,在对应的目录下打开index.html文件即可查看覆盖率详细信息
 
 ### 编译library
 如上文中所提,编译library只需要在`ng build` 后面添加上library名,同时添加上--prod即可:  
