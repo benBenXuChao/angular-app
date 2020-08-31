@@ -94,7 +94,7 @@ ng test @goku/http
 ```
 ng test @goku/http --codeCoverage
 ```  
-覆盖率报告可在/coverage目录下查看,该目录下会按照library名生成对应目录,在对应的目录下打开index.html文件即可查看覆盖率详细信息
+覆盖率报告可在`/coverage`目录下查看,该目录下会按照library名生成对应目录,在对应的目录下打开index.html文件即可查看覆盖率详细信息
 
 ### 编译library
 如上文中所提,编译library只需要在`ng build` 后面添加上library名,同时添加上--prod即可:  
@@ -179,6 +179,152 @@ export const hybridRoutes = new GKRoutes([
 import { xxx } from '@goku/http'
 ```
 
+## 新增本地node服务接口
+
+node服务位于`/server/`目录当中
+
+### 新增接口
+
+所有调试用的ajax接口都用`/api`做开头,调试调用接口时请注意.
+该node服务内部已经集成了自动加载功能,服务在启动时会自动读取`/server/apis`目录下的所有文件并生成api接口.路径和文件名关联,但不和目录关联.创建api文件时可无限嵌套目录,各位可按照自己需要创建目录进行管理
+
+举例说明:
+  现在我希望创建一个 路径为 `/api/department` 请求方式为`get` 的接口.可通过如下步骤完成
+
+1. 新建文件
+  在`apis`目录下新建文件`department.js`文件.
+2. 编写接口代码
+  进入文件中,通过 `module.exports = {}`的形式导出一个对象,对象下定义一个get属性,值为函数:
+`department.js`  
+```
+module.exports = {
+  get(req,res){
+    res.json({ code: 0, message: 'success' })
+  }
+}
+```  
+3. 重启服务
+  由于存在新增文件,supervisor自动重启机制对文件读取支持度并不很好,所以还是建议手动重启服务.
+  重启完成后,可以通过前端程序访问 `/api/department` 接口查看效果.
+  或者更快的方式是通过浏览器访问 `http://localhost:3000/api/department`, 能在页面中看到返回值,说明接口创建成功
+
+说明: 当接口被请求时,上述说明被创建的api接口文件内的对应函数就会被调用执行.不同的请求方法会触发对应的函数,如没有该方法对应的函数,则接口会向前端响应404.而响应接口,需要通过函数的第二个形参(示例中的res)来进行响应.详细说明见后文
+
+### 接口文件管理  
+如果存在多人开发的情况,所有人创建的文件放在一块容易存在冲突.因此建议开发者们都在创建api文件时,将文件放在自己特定的目录当中,在自己的目录下,也可以根据需要模拟的业务场景进行再次创建目录进行分类.放心,只要文件存在于'/server/apis'目录下,无论多深,都能读取到.同时目录层级并不会对接口的路径产生影响
+例如,我在创建刚才的`department.js`文件时 将其放到 `/server/apis/zhuiszhu/bussines/` 目录下.  而最终该接口的访问地址  依旧是`/api/department`
+
+
+### 多层级路径接口
+有时,我们想要模拟存在多层级接口的情况,此时只需要通过'.'来分割文件名即可达到新增接口路径层级的目的.
+例如,我现在希望新增路径为`/api/users/list`的接口. 此时,你只需要在`/server/apis/`目录下的任意位置创建名字为`users.list.js`的文件即可.
+
+
+### 使用路径参数
+如果你想模拟后端使用路径参数的场景(即,将id等类型的参数当做路径传递,相当于前端路由当中的`/xxx/:id`).则只需要在对应的字段前用`_`替换`:`即可.
+例如, 我希望新增一个路径为`/api/goods/detail/:id` 的商品详情接口, 商品id通过路径的最后一位传递到服务当中,此时的文件名为: `goods.detail._id.js`.
+
+### 创建其他类型接口
+诚然,不是所有的接口都是get类型,如果我需要创建post或者put类型的接口怎么办呢? 在文件导出的对象中 使用`post`或者`put`属性即可
+`department.js`
+```
+module.exports = {
+  post(req,res){
+    res.json({ code: 0, message: 'success' })
+  },
+  put(req,res){
+    res.json({ code: 0, message: 'success' })
+  }
+}
+```
+我们的接口当然不止支持三种类型,所有请求类型参考如下:
+`get`, `post`, `put`, `delete`, `options`, `head`, `connect`, `trace`, `patch`,`all`
+其中 `all` 代表所有类型的请求都会被该函数捕捉到
+
+
+### 请求处理
+通过上面的文档,我们可以看到,所有的请求都是由一个函数处理的.事实上,每当有一个用户请求接口,该接口对应的方法就会执行一次  
+通过示例,我们可以看到该函数接收两个形参:
+第一个是`request`对象,形参一般简写为`req`它包含了所有客户端发起请求时的信息.包括请求路径,请求头,请求参数等等.都能通过它获取到
+第二个是`response`对象,形参一般简写为`res`.通过它,我们可以向发起请求的客户端进行响应,返回给客户端它所需要的值
+
+#### 接收参数
+我们都知道,在前端发起请求时,不同的请求方法,参数会放在不同的地方传递到后端.比如,get delete等方法,请求参数会放在url当中进行发送.而post,put等都会放在body当中进行发送.
+因此,通过req来获取参数时,也会根据不同的属性来接收参数:
+`get`,`delete`等方法发送的请求,通过`req.query`来接收
+`post`,`put` 等方法发送的请求,通过`req.body`来接收
+另外还有一种路径参数,即接口定义为 `/xxx/xxx/:id`形式的参数,可通过`req.params`来接收
+`department.js`  
+```
+module.exports = {
+  get(req,res){
+    // 用get方法请求 /api/department  传递参数  {deptId:12}
+    console.log(req.query) // 输出:  {deptId:12}
+  },
+  post(req,res){
+    // 用post方法请求 /api/department  传递参数  {deptId:24}
+    console.log(req.body) // 输出:  {deptId:24}
+  }
+}
+```
+`department._id.js`  
+```
+module.exports = {
+  get(req,res){
+    // 用get方法请求 /api/department/18 
+    console.log(req.params) // 输出: {id:18}
+  }
+}
+```
+
+#### 获取请求路径
+如想得知前端请求的路径是什么,可通过`req.originalUrl`来进行获取
+
+#### 获取cookie
+`req.cookies`
+
+#### 获取请求的域名
+`req.hostname`
+
+#### 获取ip
+`req.ip`
+
+#### 获取请求头内的数据
+如想要获取存放在请求头内的数据,调用`get`方法,并且传入请求头的key名即可:`req.get(keyName)`.比如,要获取请求头中的token信息:  
+```
+module.exports = {
+  get(req,res){
+    const token = req.get('token');
+    console.log(token);
+  }
+}
+```
+
+#### 响应接口
+通过`res.json()`函数即可向前端响应`json`类型的数据
+
+#### 设置状态码
+如需要将响应接口的http状态码进行设置,则通过`status()`函数即可,例如:
+```
+res.status(201).json({ code: 0, message: '请求成功', data: {...} })
+```
+
+#### 设置cookie
+使用`cookie()`函数,用法同`status()`,例如:
+```
+  res
+    .status(201)
+    .cookie('test','cookie内容')
+    .json({ ... })
+```  
+
+#### 重定向
+如需要通过接口来实现重定向功能,使用`redirect()`函数即可:
+```
+res.redirect('/user/login')
+// 或者
+//  res.redirect('http://xxx.xxx.com/user/login')
+```
 
 
 <!--
