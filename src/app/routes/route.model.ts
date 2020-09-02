@@ -23,10 +23,11 @@ export class GKRoutes {
    * @param routes 混合路由配置列表
    */
   private getRouteList(routes: GKRoute[]): Routes {
-    const target: Routes = routes.map(({ path, component, children }) => {
+    const target: Routes = routes.map(({ path, component, children, otherAttr = {} }) => {
       const item: Route = {
         path,
         component,
+        ...otherAttr
       };
 
       if (Array.isArray(children)) {
@@ -97,6 +98,8 @@ export class GKRoute {
     /** 映射在菜单上的文本内容,若不存在该参数,则代表该路由配置不会出现在菜单列表中 */
     readonly text?: string,
     /** 子级路由 */
-    readonly children?: GKRoute[]
+    readonly children?: GKRoute[],
+    /** 其他需要添加到路由上的配置属性,比如data等 */
+    readonly otherAttr?: Route
   ) {}
 }

@@ -9,6 +9,16 @@ export const hybridRoutes = new GKRoutes([
    * 第三个参数为列表,内部为二级混合路由对象
    */
   new MI('代码逻辑', 'dashboard', [
-    new GKRoute('base-table', BaseTableComponent, '基础表格')
+    /**
+     * GKRoute为混合路由对象
+     * 第一个参数代表路由路径
+     * 第二个参数代表路径对应加载的组件
+     * 第三个参数为可选参数, 代表映射到主菜单上的文本,如不加参数,则该路由不会被映射到菜单上,多用于详情页等无需添加到菜单上的页面
+     * 第四个参数为可选参数, 为数组类型,元素值依旧为GKRoute类型,代表子路由
+     * 第五个参数为可选参数, 为其他需要配置到路由对象上的属性. 比如添加data配置值
+     */
+    new GKRoute('base-table', BaseTableComponent, '基础表格', undefined, {
+      data: { keep: true },
+    }),
   ]),
 ]);
