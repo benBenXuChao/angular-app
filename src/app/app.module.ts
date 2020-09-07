@@ -7,13 +7,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { GKHttpModule } from '@goku/http';
 import { IconsProviderModule } from './icons-provider.module';
 import { MenuComponent } from './components/menu/menu.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { BaseTableComponent } from './pages/base-table/base-table.component';
+
+import {SharedModule} from './shared/shared.module'
 
 import {
   NzTableModule,
@@ -41,7 +43,9 @@ registerLocaleData(zh);
     GKHttpModule,
     IconsProviderModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent],

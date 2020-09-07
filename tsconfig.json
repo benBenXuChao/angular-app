@@ -18,6 +18,12 @@
     },
     {
       "path": "./projects/goku/http/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/goku/tools/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/goku/tools/tsconfig.spec.json"
     }
 ]
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DepartmentService } from '../../services/department.service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-base-table',
@@ -17,7 +18,8 @@ export class BaseTableComponent implements OnInit {
   dataList = [];
   constructor(
     private dept: DepartmentService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private fb: FormBuilder
   ) {}
 
   add(): void {

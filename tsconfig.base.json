@@ -19,6 +19,10 @@
       "@goku/http": [
         "dist/goku/http/goku-http",
         "dist/goku/http"
+      ],
+      "@goku/tools": [
+        "dist/goku/tools/goku-tools",
+        "dist/goku/tools"
       ]
     }
   }

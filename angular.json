@@ -170,6 +170,46 @@
           }
         }
       }
+    },
+    "@goku/tools": {
+      "projectType": "library",
+      "root": "projects/goku/tools",
+      "sourceRoot": "projects/goku/tools/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/goku/tools/tsconfig.lib.json",
+            "project": "projects/goku/tools/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/goku/tools/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/goku/tools/src/test.ts",
+            "tsConfig": "projects/goku/tools/tsconfig.spec.json",
+            "karmaConfig": "projects/goku/tools/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/goku/tools/tsconfig.lib.json",
+              "projects/goku/tools/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "goku",
