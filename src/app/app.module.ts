@@ -15,7 +15,7 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { BaseTableComponent } from './pages/base-table/base-table.component';
 
-import {SharedModule} from './shared/shared.module'
+import { SharedModule } from './shared/shared.module';
 
 import {
   NzTableModule,
@@ -45,7 +45,7 @@ registerLocaleData(zh);
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent],
