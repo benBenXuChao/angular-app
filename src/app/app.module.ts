@@ -24,11 +24,12 @@ import {
   NzButtonModule,
   NzMessageModule,
 } from 'ng-zorro-antd';
+import { ExcelComponent } from './pages/excel/excel.component';
 
 registerLocaleData(zh);
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, BaseTableComponent],
+  declarations: [AppComponent, MenuComponent, BaseTableComponent, ExcelComponent],
   imports: [
     // zorror框架模块start
     NzTableModule,
