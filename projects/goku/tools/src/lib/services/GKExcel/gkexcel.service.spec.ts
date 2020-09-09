@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GKExportExcelService } from './gkexport-excel.service';
+import { GKExcelService } from './gkexcel.service';
 
 describe('GKExportExcelService服务测试', () => {
-  let service: GKExportExcelService;
+  let service: GKExcelService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [GKExportExcelService],
+      providers: [GKExcelService],
     });
-    service = TestBed.inject(GKExportExcelService);
+    service = TestBed.inject(GKExcelService);
   });
 
   it('服务被正常创建', () => {

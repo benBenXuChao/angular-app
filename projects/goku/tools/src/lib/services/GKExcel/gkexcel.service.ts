@@ -9,7 +9,7 @@ type TableData = {
 @Injectable({
   providedIn: 'root',
 })
-export class GKExportExcelService {
+export class GKExcelService {
   constructor() {}
 
   /**
