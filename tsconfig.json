@@ -25,5 +25,8 @@
     {
       "path": "./projects/goku/tools/tsconfig.spec.json"
     }
-]
+],
+"compilerOptions": {
+  "experimentalDecorators": true
+}
 }
