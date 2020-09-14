@@ -2,6 +2,7 @@ type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
 /**
  * 接口类,包含请求路径和请求方法
+ * ### 示例:
  * ```typescript
  * new GKApi('/api/users')
  * ```
@@ -14,10 +15,15 @@ export class GKApi {
    * 创建一个接口实例
    * @param url 请求路径
    * @param method 请求方法
+   * ### 示例:
+   * ```typescript
+   * new GKApi('/api/users') // get请求
+   * new GKApi('/api/users','post') // post请求
+   * new GKApi('/api/users','put') // put请求
+   * new GKApi('/api/users','delete') // delete请求
+   * ```
    */
-  constructor(
-    readonly url: string,
-    method: string = 'get') {
+  constructor(readonly url: string, method: string = 'get') {
     this.method = this.methodHandler(method);
   }
 

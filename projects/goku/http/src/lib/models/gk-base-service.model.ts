@@ -8,6 +8,7 @@ type HttpServiceFun = (...arg: any) => Observable<any>;
  * 列表，增删改查服务创建基类
  * ## 用法
  * 页面服务只需要继承当前抽象类,并将API集合传入到super()方法中,页面服务即可具备api集合中存在的各方法(add,list,update等)
+ * ### 示例:
  * ```typescript
  * import { API } from '../api/api.conf';
  * export class DepartmentService extends GKBaseService {

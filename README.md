@@ -345,3 +345,214 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 -->
+
+## 生成文档  
+library开发测试完毕之后,还需要对提供相关说明文档,这样框架开发出来才能达到能够被使用的目的. 在初期,开发人力资源不够充足的情况下,为了节约开发资源,现决定通过`typedoc`文档生成器来生成api文档.  
+`typedoc`是专门针对ts注释来生成api文档的文档自动生成工具
+
+### 工具安装
+通过`npm`全局安装即可:
+```
+npm i typedoc -g
+```
+
+### 复制配置文件  
+
+typedoc在执行的时候需要进行一些固定配置.该配置文件以及提前编写好,并存放在`/project/goku/http` 目录下, 文件名`typedoc.json`
+在生成文档之前,需要将该文件复制到自己的library根目录当中
+
+### 执行命令,生成说明文档
+
+进入到自己的library开发目录的根目录当中(即上一步存放`typedoc.json`文件的目录).假设你的library是@goku/tools 那么你的开发目录则是 /projects/goku/tools/
+然后执行命令`typedoc`即可
+最终,会在你library开发目录的 `/src/docments` 下生成html格式的api文档,通过浏览器打开`index.html`即可
+
+## library注释规范
+
+所有对外暴露的接口,类,函数等等模块均需要书写注释,一来方便调用时IDE提供调用提示,二来是为了`typedoc`工具能够生成对应文档说明
+
+### 基本用法
+所有的对外暴露模块的注释,必须以 `/**` 标识为开头,  `*/` 为结尾  
+对外暴露模块中,至少村长两部分注释内容  
+1.模块的基本功能介绍  
+2.模块使用代码案例,代码案例前需要用三级标题进行声明一下(使用三个`#`加空格即可,详见如下案例)
+代码块标识同markdown语法,只不过是在`/**  */`注释的标识范围内书写完成的
+例如:
+```
+/**
+ * 接口类,包含请求路径和请求方法
+ * ### 示例:
+ * ```typescript
+ * new GKApi('/api/users')
+ * ```
+ */
+export class GKApi {
+  ...
+}
+```
+
+注意: 如果是函数类型,还需要通过`@param`标识来对每个形参添加说明  
+而如果存在`@param`标识的时候,示例代码必须放在`@param` 部分的后面
+
+### 成员描述
+
+所有对外暴露的 类/抽象类 接口 枚举 除了对其本身添加注释描述,还需要对公共成员(被`public`访问修饰符修饰的成员)添加注释描述  
+
+#### 属性成员  
+对于简单的成员,比如属性成员,可通过以`/**`开头和以`*/`为结尾的单行注释来进行描述,例如:  
+```
+/**
+ * 接口类,包含请求路径和请求方法
+ * ```typescript
+ * new GKApi('/api/users')
+ * ```
+ */
+export class GKApi {
+  /** 发起请求的方法类型 */
+  readonly method: MethodType;
+
+  ...
+}
+```
+
+#### 函数成员
+
+而对于复杂的函数成员以及构造函数成员,则需要采用正常对外函数的注释形式进行注释,至少包含三部分:  
+1. 函数功能用法说明
+2. 函数调用示例代码
+3. 函数的参数说明  
+
+例如:  
+```
+/**
+ * ...
+ */
+export class GKApi {
+  /** ... */
+  readonly method: MethodType;
+
+  /** ... */
+  readonly url: string
+
+  /**
+  * 创建一个接口实例
+  * @param url 请求路径
+  * @param method 请求方法
+  * ### 示例
+  * ```typescript
+  * let USER = new GKApi('/api/user/')
+  * ```
+  */
+  constructor( url: string,
+    method: string = 'get') {
+    this.url = url
+    this.method = this.methodHandler(method);
+  }
+}
+```  
+说明: 参数的注释描述,直接使用vs-code生成的 @param进行描述即可  不同于jsDoc 由于ts本身就具备属性类型声明,所以在tsDoc规范中,属性注释无需再对类型进行标记  属性名后面直接书写属性描述即可
+
+#### 构造函数中的属性成员注释
+在类的声明中,ts提供了属性成员声明的语法糖,可以快捷的让我们直接在构造函数中声明成员属性(在构造函数的形参前面加上访问修饰符,比如`public`)  
+而要对这种类型的属性成员添加注释也很简单,只需要将该形参单独占一行,然后再上面添加`/**  */`类型注释即可,例如:
+```
+/**
+ * ...
+ */
+export class GKApi {
+  /** ... */
+  readonly method: MethodType;
+
+  /**
+  * ...
+  */
+  constructor(
+    /** 该api的请求路径 */
+    readonly url: string,
+    method: string = 'get') {
+    this.method = this.methodHandler(method);
+  }
+}
+```  
+
+### 非文档输出性注释  
+有些时候,代码当中的注释只是提供给开发人员自己或者内部团队查看和使用的.这种情况下,我们也强烈建议按照常见的tsDoc规范进行注释.但是这种注释并不需要被输出称文档提供给框架调用者阅读.此时,我们就需要通过一些手段来避免这些注释被生成到文档当中  
+
+#### 私有属性注释
+对于类/抽象类等类型的模块,如果成员被`private`访问修饰符给修饰,则该成员的注释默认不会被生成到api文档文件中.你无需做任何处理  
+例如:
+```
+/**
+ * 接口类,包含请求路径和请求方法
+ * ```typescript
+ * new GKApi('/api/users')
+ * ```
+ */
+export class GKApi {
+  /** 发起请求的方法类型 */
+  readonly method: MethodType;
+
+  /**
+   * 创建一个接口实例
+   * @param url 请求路径
+   * @param method 请求方法
+   */
+  constructor(
+    readonly url: string,
+    method: string = 'get') {
+    this.method = this.methodHandler(method);
+  }
+
+  /**
+   * 请求类型字符处理,传入简写方式 输出标准方法类型
+   * @param type 请求类型
+   */
+  private methodHandler(type: string): MethodType {
+    let mtd: MethodType;
+    switch (type) {
+      case 'g':
+      case 'get':
+      case 'GET':
+      case 'Get':
+        mtd = 'GET';
+        break;
+      case 'p':
+      case 'post':
+      case 'POST':
+      case 'Post':
+        mtd = 'POST';
+        break;
+      case 'put':
+      case 'PUT':
+      case 'Put':
+        mtd = 'PUT';
+        break;
+      case 'd':
+      case 'delete':
+      case 'del':
+      case 'Delete':
+      case 'DELETE':
+      case 'Del':
+      case 'DEL':
+        mtd = 'DELETE';
+        break;
+      default:
+        throw new Error('无法识别请求方法类型.');
+    }
+    return mtd;
+  }
+}
+```  
+在如上代码中,`methodHandler`方法是GKApi类的私有函数成员.所以,在关于该类的api文档中,只会存在关于该类的整体介绍,构造函数说明, 以及`method`,`url`属性的说明介绍
+
+#### 普通模块
+而在开发过程中,除了私有属性,经常也会存在某些方法并非是对外提供,但是是需要在文件中暴露出去,提供给模块的其他部分代码使用的情况.这时候,该模块的注释并不需要被生成到文档中,而我们只需要通过`@internal`标识在注释中声明一下即可,例如:  
+```
+/**
+ * @internal
+ * 将简写api类型处理成全字符的
+ * @param type api类型
+ */
+function apiTypeHandler(type: ApiTypeExp): ApiType { ... }
+```
+注意: `@internal`标识必须在注释的最开头部分声明
