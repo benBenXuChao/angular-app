@@ -1,5 +1,6 @@
 import { GKRoutes, GKMenuItem as MI, GKRoute } from './route.model';
 import { BaseTableComponent } from '../pages/base-table/base-table.component';
+import { ExcelComponent } from '../pages/excel/excel.component';
 
 export const hybridRoutes = new GKRoutes([
   /**
@@ -20,5 +21,6 @@ export const hybridRoutes = new GKRoutes([
     new GKRoute('base-table', BaseTableComponent, '基础表格', undefined, {
       data: { keep: true },
     }),
+    new GKRoute('excel', ExcelComponent, '表格导出'),
   ]),
 ]);

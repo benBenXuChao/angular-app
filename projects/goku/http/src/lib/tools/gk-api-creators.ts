@@ -9,6 +9,10 @@ type ApiTypeExp = ApiType | 'L' | 'A' | 'R' | 'U' | 'D' | 'O';
  * api对象生成器,用于生成包含 列表,添加,删除,修改,查询,下拉选项等接口的对象
  * @param url 请求路径
  * @param excludes 不需要生成的接口类型或者接口类型列表
+ * ### 示例:
+ * ```typescript
+ * const USER = gkApiCreators('/api/user', 'option')
+ * ```
  */
 export function gkApiCreators(
   url: string,
@@ -38,6 +42,7 @@ export function gkApiCreators(
 }
 
 /**
+ * @internal
  * 将简写api类型处理成全字符的
  * @param type api类型
  */

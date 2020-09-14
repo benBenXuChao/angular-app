@@ -2,6 +2,7 @@ const listCreator = require('../../tools/listCreator')
 const body = require('../../tools/bodyPack')
 module.exports = {
     get(req, res) {
+        console.log(req.query);
         const list = listCreator(i => ({
             id: i,
             deptName: `部门${i + 1}`,

@@ -1,31 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { DepartmentService } from '../../services/department.service';
+import { DepartmentService } from 'src/app/services/department.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { FormBuilder } from '@angular/forms';
+import { GKExcelService } from '@goku/tools';
 
 @Component({
-  selector: 'app-base-table',
-  templateUrl: './base-table.component.html',
-  styleUrls: ['./base-table.component.less'],
+  selector: 'app-excel',
+  templateUrl: './excel.component.html',
+  styleUrls: ['./excel.component.less'],
 })
-export class BaseTableComponent implements OnInit {
+export class ExcelComponent implements OnInit {
   cols = [
-    { prop: 'id', label: '部门ID' },
-    { prop: 'deptName', label: '部门名称' },
-    { prop: 'parentNum', label: '人数' },
+    { prop: 'id', text: '部门ID' },
+    { prop: 'deptName', text: '部门名称' },
+    { prop: 'parentNum', text: '人数' },
   ];
 
   dataList = [];
   constructor(
     private dept: DepartmentService,
     private message: NzMessageService,
-    private fb: FormBuilder
+    private excel: GKExcelService
   ) {}
 
-  add(): void {
-    this.dept.add().subscribe(() => {
-      this.message.success('数据添加成功!');
-    });
+  export(): void {
+    this.excel.export('demo', this.cols, this.dataList);
   }
 
   ngOnInit(): void {
