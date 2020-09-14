@@ -16,6 +16,19 @@ export class GKRequestService {
    * 发起http请求，返回一个observable实例
    * @param api 接口实例
    * @param data 请求时需要传递的参数
+   * ### 示例:
+   * ```typescript
+   * import {API} from '.../api.conf.ts'
+   *
+   * export class XXXService {
+   *
+   *  constructor(private req:GKRequestService){}
+   *
+   *  getList(){
+   *    return this.req.request(API.USER.LIST)
+   *  }
+   * }
+   * ```
    */
   request(api: GKApi, data: any = null): Observable<any> {
     const params = new HttpParams({ fromObject: data });

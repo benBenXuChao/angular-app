@@ -1,0 +1,9 @@
+{
+  "inputFiles": ["./src/lib"],
+  "out": "./src/documents",
+  "mode": "file",
+  "excludePrivate": true,
+  "stripInternal": true,
+  "exclude": ["**/*+(index|.spec|.e2e|test).ts"],
+  "hideGenerator": true
+}
