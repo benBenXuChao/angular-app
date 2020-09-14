@@ -2,7 +2,6 @@ type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
 /**
  * 接口类,包含请求路径和请求方法
- * @see model1
  * ```typescript
  * new GKApi('/api/users')
  * ```
