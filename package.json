@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "onekey": " start.sh",
     "start": "ng serve --open --proxy-config proxy.conf.json",
     "server": "supervisor ./server/bin/www",
     "build": "ng build",
