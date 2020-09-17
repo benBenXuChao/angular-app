@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "goku": {
+    "goku-stuffing": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/goku",
+            "outputPath": "dist/goku-stuffing",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "goku:build"
+            "browserTarget": "goku-stuffing:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "goku:build:production"
+              "browserTarget": "goku-stuffing:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "goku:build"
+            "browserTarget": "goku-stuffing:build"
           }
         },
         "test": {
@@ -121,11 +121,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "goku:serve"
+            "devServerTarget": "goku-stuffing:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "goku:serve:production"
+              "devServerTarget": "goku-stuffing:serve:production"
             }
           }
         }
@@ -212,7 +212,7 @@
       }
     }
   },
-  "defaultProject": "goku",
+  "defaultProject": "goku-stuffing",
   "cli": {
     "analytics": false
   }
