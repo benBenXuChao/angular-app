@@ -1,24 +1,29 @@
-# Tools
+# @goku/Tools
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.11.
+<!-- 模块基础功能内容描述 -->
+各种工具模块.提供excel文件处理工具服务
 
-## Code scaffolding
+<!-- 
+    模块的作者信息
+    创建者: 该library的创建人
+    贡献者: 提供模块开发支持的人员,包括创建者以及提供单元测试的开发者
+    单元测试: 提供单元测试代码的开发者
+-->
+> 创建者: 朱盛文
+> 贡献者: 朱盛文
+> 单元测试: 朱盛文
 
-Run `ng generate component component-name --project tools` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project tools`.
-> Note: Don't forget to add `--project tools` or else it will be added to the default project in your `angular.json` file. 
+## 安装
+<!-- 
+    模块的基础安装使用方式
+    若存在复杂配置的前置操作,请在该分类下说明
+ -->
+```
+npm i @goku/tools -S
+```
 
-## Build
-
-Run `ng build tools` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build tools`, go to the dist folder `cd dist/tools` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test tools` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## 文档
+<!-- 
+    通过typedoc工具生成的文档地址
+ -->
+详见 ![./src/documents/index.html](./src/documents/index.html) 

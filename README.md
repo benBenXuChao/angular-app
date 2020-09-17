@@ -40,6 +40,17 @@ npm i supervisor -g
 ng build @goku/http --prod
 ```
 
+<br/>  
+
+### 编译现有library
+编译命令和官网相同  
+`ng build <libraryName> --prod`  
+<br/>
+例如:
+```
+ng build @goku/http --prod
+```
+
 <br/>
 
 ### 启动node服务
