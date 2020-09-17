@@ -45,6 +45,7 @@ export function gkApiCreators(
  * @internal
  * 将简写api类型处理成全字符的
  * @internal
+ * 将简写api类型处理成全字符的
  * @param type api类型
  */
 function apiTypeHandler(type: ApiTypeExp): ApiType {
