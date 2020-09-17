@@ -42,13 +42,12 @@ ng build @goku/http --prod
 
 <br/>  
 
-### 编译现有library
-编译命令和官网相同  
-`ng build <libraryName> --prod`  
-<br/>
-例如:
-```
-ng build @goku/http --prod
+
+### 一键安装
+新增说明: 为了简化环境安装过程,现新增shell脚本文件,可实现一键自动安装 主程序,node服务运行依赖, 自动全局安装supervisor服务启动器(有自动判断,若已安装则不会重复安装), 自动编译所有library.
+在更新dev分支到本地后,仅需执行如下命令即可:
+```shell
+npm run onekey
 ```
 
 <br/>
