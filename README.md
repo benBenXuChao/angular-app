@@ -106,6 +106,18 @@
     <td class='success'>已完成</td>
   </tr>
 <!-- 胡定华end -->
+<!-- 严胜start -->
+  <tr>
+    <td rowspan='2'>严胜</td>
+    <td rowspan='2'>技术管理</td>
+    <td>框架对外模块api文档解决方案预研</td>
+    <td class='success'>已完成</td>
+  </tr>
+  <tr>
+    <td>实验性文档项目搭建和演示</td>
+    <td class='success'>已完成</td>
+  </tr>
+<!-- 严胜end -->
 
 </table>
 <br/>
