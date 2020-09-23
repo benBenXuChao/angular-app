@@ -3,6 +3,7 @@
 ## 功勋墙
 
 <br/>
+<!--
 <style>
 .success{
   color: #68bd80;
@@ -14,6 +15,7 @@
   content: '...';
 }
 </style>
+-->
 <table style='width:100%;text-align:center;'>
   <tr>
     <th>人员</th>
@@ -21,7 +23,6 @@
     <th>支持</th>
     <th>状态</th>
   </tr>
-
 <!-- 陈洋start -->
   <tr>
     <td rowspan='2'>陈洋</td>
