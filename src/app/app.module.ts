@@ -25,11 +25,12 @@ import {
   NzMessageModule,
 } from 'ng-zorro-antd';
 import { ExcelComponent } from './pages/excel/excel.component';
+import { MyNgifNgforComponent } from './pages/my-ngif-ngfor/my-ngif-ngfor.component';
 
 registerLocaleData(zh);
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, BaseTableComponent, ExcelComponent],
+  declarations: [AppComponent, MenuComponent, BaseTableComponent, ExcelComponent, MyNgifNgforComponent],
   imports: [
     // zorror框架模块start
     NzTableModule,

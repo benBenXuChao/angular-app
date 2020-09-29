@@ -1,6 +1,7 @@
 import { GKRoutes, GKMenuItem as MI, GKRoute } from './route.model';
 import { BaseTableComponent } from '../pages/base-table/base-table.component';
 import { ExcelComponent } from '../pages/excel/excel.component';
+import { MyNgifNgforComponent } from '../pages/my-ngif-ngfor/my-ngif-ngfor.component';
 
 export const hybridRoutes = new GKRoutes([
   /**
@@ -19,6 +20,9 @@ export const hybridRoutes = new GKRoutes([
      * 第五个参数为可选参数, 为其他需要配置到路由对象上的属性. 比如添加data配置值
      */
     new GKRoute('base-table', BaseTableComponent, '基础表格', undefined, {
+      data: { keep: true },
+    }),
+    new GKRoute('my-ngif-ngfor', MyNgifNgforComponent, 'ngIf和ngFor', undefined, {
       data: { keep: true },
     }),
     new GKRoute('excel', ExcelComponent, '表格导出'),
