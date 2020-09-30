@@ -1,1 +1,27 @@
-<p>my-ngif-ngfor works!</p>
+<!--
+ * @Author: your name
+ * @Date: 2020-09-29 11:20:53
+ * @LastEditTime: 2020-09-30 11:24:12
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /angular-app/src/app/pages/my-ngif-ngfor/my-ngif-ngfor.component.html
+-->
+<div class="my-ngif-ngfor-page">
+    <nz-card>
+        <div *appMyIf="condition"><span>我自己的ngIf</span></div>
+        <button nz-button nz-type="primary" (click)="condition = !condition">{{condition?'隐藏':'显示'}}</button>
+    </nz-card>
+    <br />
+    <nz-card>
+        <div>我自己的ngFor</div>
+        <div *appMyFor="let item of students;index as i">
+            <p>
+                <span>{{i}}--</span> 姓名：{{item.name}}&nbsp;&nbsp;年龄：{{item.age}}&nbsp;&nbsp;
+                <button nz-button (click)="handel('remove',i)">删除</button>&nbsp;&nbsp;
+                <button nz-button (click)="handel('update',i)">修改</button>&nbsp;&nbsp;
+                <button nz-button (click)="handel('modify',i)">微改</button>
+            </p>
+        </div>
+        <button nz-button (click)="handel('add')">新增</button>&nbsp;&nbsp;
+    </nz-card>
+</div>

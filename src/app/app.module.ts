@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-09-29 11:18:03
+ * @LastEditTime: 2020-09-29 14:53:21
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /angular-app/src/app/app.module.ts
+ */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -26,7 +34,6 @@ import {
 } from 'ng-zorro-antd';
 import { ExcelComponent } from './pages/excel/excel.component';
 import { MyNgifNgforComponent } from './pages/my-ngif-ngfor/my-ngif-ngfor.component';
-
 registerLocaleData(zh);
 
 @NgModule({
@@ -52,4 +59,4 @@ registerLocaleData(zh);
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
