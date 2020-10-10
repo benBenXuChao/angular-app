@@ -1,0 +1,22 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-10 13:53:43
+ * @LastEditTime: 2020-10-10 14:57:02
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /angular-app/src/app/components/ng-template-outlet/ng-template-outlet.component.html
+-->
+<div>
+<p (click)="handel(item,$index)" [ngStyle]="{cursor: 'pointer'}" *ngFor="let item of list;index as $index">
+        {{item}}
+    </p>
+    <!-- <template>  <ng-template> <ng-container> 都可承载这个指令 -->
+    <template *ngTemplateOutlet="template context: context"></template>
+    <form #form="ngForm" (ngSubmit)="submit(form)">
+        <!-- 经测试无法传入input进入，ngForm无法追踪到ngModel字段 -->
+        <ng-template *ngTemplateOutlet="ngTemplate"></ng-template> 
+        <ng-container *ngTemplateOutlet="ngTemplate"></ng-container>
+        <input nz-input type="text" name="test" [(ngModel)]="test" >
+        <button nz-button type="submit">提交</button>
+    </form>
+</div>

@@ -1,7 +1,16 @@
+/*
+ * @Author: your name
+ * @Date: 2020-09-29 11:18:03
+ * @LastEditTime: 2020-10-10 14:17:59
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /angular-app/src/app/routes/routes.conf.ts
+ */
 import { GKRoutes, GKMenuItem as MI, GKRoute } from './route.model';
 import { BaseTableComponent } from '../pages/base-table/base-table.component';
 import { ExcelComponent } from '../pages/excel/excel.component';
 import { MyNgifNgforComponent } from '../pages/my-ngif-ngfor/my-ngif-ngfor.component';
+import { TemplateComponent } from '../pages/template/template.component';
 
 export const hybridRoutes = new GKRoutes([
   /**
@@ -23,6 +32,9 @@ export const hybridRoutes = new GKRoutes([
       data: { keep: true },
     }),
     new GKRoute('my-ngif-ngfor', MyNgifNgforComponent, 'ngIf和ngFor', undefined, {
+      data: { keep: true },
+    }),
+    new GKRoute('template-view', TemplateComponent, '关于template', undefined, {
       data: { keep: true },
     }),
     new GKRoute('excel', ExcelComponent, '表格导出'),

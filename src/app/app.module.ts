@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-09-29 11:18:03
- * @LastEditTime: 2020-09-29 14:53:21
+ * @LastEditTime: 2020-10-10 15:32:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /angular-app/src/app/app.module.ts
@@ -34,10 +34,19 @@ import {
 } from 'ng-zorro-antd';
 import { ExcelComponent } from './pages/excel/excel.component';
 import { MyNgifNgforComponent } from './pages/my-ngif-ngfor/my-ngif-ngfor.component';
+import { TemplateComponent } from './pages/template/template.component';
+import { NgTemplateOutletComponent } from './components/ng-template-outlet/ng-template-outlet.component';
 registerLocaleData(zh);
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, BaseTableComponent, ExcelComponent, MyNgifNgforComponent],
+  declarations: [
+    AppComponent,
+    MenuComponent,
+    BaseTableComponent,
+    ExcelComponent,
+    MyNgifNgforComponent,
+    TemplateComponent,
+    NgTemplateOutletComponent],
   imports: [
     // zorror框架模块start
     NzTableModule,

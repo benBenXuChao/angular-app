@@ -1,0 +1,24 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-10 14:05:30
+ * @LastEditTime: 2020-10-10 14:57:58
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /angular-app/src/app/pages/template/template.component.html
+-->
+<div>
+    <nz-card nzTitle="ng-templateOutlet的使用示例">
+        <app-ng-template-outlet [list]="list" [tem]="myTem" [ngTemplate]="ngTemplate">
+
+        </app-ng-template-outlet>
+        <ng-template #myTem let-name let-index=index>
+            <div *ngIf="index+1">
+                <span>你选择了{{name}}</span>
+                <span>ta是第{{index+1}}名</span>
+            </div>
+        </ng-template>
+        <ng-template #ngTemplate>
+            <input nz-input type="text" name="name" [(ngModel)]="name">
+        </ng-template>
+    </nz-card>
+</div>
